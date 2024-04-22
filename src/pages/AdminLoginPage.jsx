@@ -28,6 +28,22 @@ const AdminLoginPage = () => {
 	const onSubmit = async (data) => {
 		let sdk = new MkdSDK();
 		//TODO
+
+		const response = await sdk.login(data.email, data.password, "admin");
+		if (response.error) {
+			setError("email", {type: "manual", message: "Login failed"});
+		} else {
+			dispatch({
+				type: "LOGIN",
+				payload: {
+					token: response.token,
+					role: response.role,
+					userId: response.user_id,
+					expireAt: Date.now() + response.expire_at * 1000,
+				},
+			});
+			navigate("/dashboard");
+		}
 	};
 
 	return (
@@ -63,7 +79,7 @@ const AdminLoginPage = () => {
 					</label>
 					<input
 						type="password"
-						placeholder="******************"
+						placeholder="******"
 						{...register("password")}
 						className={`shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline ${
 							errors.password?.message ? "border-red-500" : ""
