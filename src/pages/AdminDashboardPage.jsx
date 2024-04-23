@@ -1,7 +1,9 @@
 import React, {useCallback, useEffect, useContext, useState} from "react";
 import {AuthContext} from "../authContext";
+import {GlobalContext} from "../globalContext";
 import {useNavigate} from "react-router-dom";
 import MkdSDK from "../utils/MkdSDK";
+import {RiUser3Line} from "react-icons/ri";
 
 import {MdKeyboardArrowDown} from "react-icons/md";
 import {DndContext, closestCorners} from "@dnd-kit/core";
@@ -15,13 +17,16 @@ import SnackBar from "../components/SnackBar";
 const AdminDashboardPage = () => {
 	const [movieResponse, setMovieResponse] = useState([]);
 	const [movieTotalPage, setMovieTotalPage] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const [showSnackbar, setShowSnackbar] = useState(false);
 	const navigate = useNavigate();
-	const {dispatch} = useContext(AuthContext);
+	const {dispatch: authDispatch} = useContext(AuthContext);
+	const {dispatch: globalDispatch} = useContext(GlobalContext);
+
 	let [page, setPage] = useState(1);
 
 	const handleLogout = () => {
-		dispatch({type: "LOGOUT"});
+		authDispatch({type: "LOGOUT"});
+		globalDispatch({type: "SNACKBAR", payload: {message: ""}});
 
 		navigate("/");
 	};
@@ -48,12 +53,26 @@ const AdminDashboardPage = () => {
 	useEffect(() => {
 		apiVideo(page);
 	}, [page]);
+	// show snackbar
+	useEffect(() => {
+		setShowSnackbar(true);
+
+		const timeout = setTimeout(() => {
+			setShowSnackbar(false);
+			globalDispatch({type: "SNACKBAR", payload: {message: ""}});
+		}, 3000);
+
+		return () => clearTimeout(timeout);
+	}, [showSnackbar]);
+	// handle prev paginationm
 	const handlePrev = () => {
 		setPage(() => page - 1);
 	};
+	// handle next pagination
 	const handleNext = () => {
 		setPage(() => page + 1);
 	};
+	// get position of item
 	const getMoviePos = (id) =>
 		movieResponse.findIndex((movie) => movie.id === id);
 	// make drag item stay in the position
@@ -71,21 +90,23 @@ const AdminDashboardPage = () => {
 	};
 
 	return (
-		<div className="w-full flex justify-center items-center text-7xl text-gray-700  ">
-			<div className=" w-full lg:w-[60%]  bg-[#111111] px-[16px] lg:px-[112px] pt-4 pb-32">
+		<div className="w-full flex justify-center items-center text-7xl text-gray-700   ">
+			{showSnackbar ? <SnackBar /> : null}
+			<div className=" w-full bg-[#111111] px-[16px] lg:px-[112px] pt-4 pb-32">
 				<div className="flex flex-col gap-32">
 					<div className="flex justify-between">
 						<p className="text-[#FFFFFF] text-[48px] font-[900]">App</p>
 						<div className="text-[16px] ">
 							<button
 								onClick={handleLogout}
-								className="px-8 py-4 bg-[#9BFF00] rounded-[2rem] "
+								className="px-8 py-4 flex gap-1 bg-[#9BFF00] rounded-[2rem] "
 							>
+								<RiUser3Line />
 								Logout
 							</button>
 						</div>
 					</div>
-					<div className="flex flex-col gap-4 lg:gap-0 lg:flex-row justify-between items-center">
+					<div className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center">
 						<p className="text-[#FFFFFF] text-[40px] font-[100] font-[inter]">
 							Today’s leaderboard
 						</p>
@@ -108,7 +129,7 @@ const AdminDashboardPage = () => {
 				</div>
 				<div className="flex justify-between items-center mt-8  w-full px-4 py-4 rounded-[1rem]  text-[16px]  ">
 					<p className="px-4">#</p>
-					<div className="w-[70%] lg:w-[55%]  flex  items-center gap-4">
+					<div className="w-[70%] lg:w-[55%]  flex pl-8  items-center gap-4">
 						<p className="text-[16px] text-gray-300 opacity-40 pr-4 font-100">
 							Title
 						</p>

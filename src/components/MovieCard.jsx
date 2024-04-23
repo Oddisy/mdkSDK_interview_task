@@ -23,7 +23,7 @@ export const MovieCard = ({id, like, title, username}) => {
 			<p className="p-4">{like}</p>
 			<div className="w-[70%] lg:w-[50%]  flex  items-center gap-4">
 				<img className="w-32 h-12 object-contain" src={toy} alt="" />
-				<p className="text-[20px] text-gray-300 opacity-40 pr-4 font-100">
+				<p className="title_responsive text-gray-300 opacity-40 pr-4 font-100">
 					{title}
 				</p>
 			</div>

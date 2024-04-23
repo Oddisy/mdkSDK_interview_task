@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import MkdSDK from "../utils/MkdSDK";
 import {useNavigate} from "react-router-dom";
 import {AuthContext} from "../authContext";
+import {GlobalContext} from "../globalContext";
 
 const AdminLoginPage = () => {
 	const schema = yup
@@ -14,7 +15,8 @@ const AdminLoginPage = () => {
 		})
 		.required();
 
-	const {dispatch} = React.useContext(AuthContext);
+	const {dispatch: authDispatch} = useContext(AuthContext);
+	const {dispatch: globalDispatch} = useContext(GlobalContext);
 	const navigate = useNavigate();
 	const {
 		register,
@@ -33,7 +35,13 @@ const AdminLoginPage = () => {
 		if (response.error) {
 			setError("email", {type: "manual", message: "Login failed"});
 		} else {
-			dispatch({
+			globalDispatch({
+				type: "SNACKBAR",
+				payload: {
+					message: "Logged in successfully!",
+				},
+			});
+			authDispatch({
 				type: "LOGIN",
 				payload: {
 					token: response.token,
