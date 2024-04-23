@@ -90,7 +90,7 @@ const AdminDashboardPage = () => {
 	};
 
 	return (
-		<div className="w-full flex justify-center items-center text-7xl text-gray-700   ">
+		<div className="w-full h-full bg-[#111111] flex justify-center items-center text-7xl text-gray-700   ">
 			{showSnackbar ? <SnackBar /> : null}
 			<div className=" w-full bg-[#111111] h-full  px-[16px] lg:px-[112px] pt-4 pb-32">
 				<div className="flex flex-col gap-32">
