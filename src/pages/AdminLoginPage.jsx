@@ -42,7 +42,7 @@ const AdminLoginPage = () => {
 					expireAt: Date.now() + response.expire_at * 1000,
 				},
 			});
-			navigate("/dashboard");
+			navigate("/admin/dashboard");
 		}
 	};
 

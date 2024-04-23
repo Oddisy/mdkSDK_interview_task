@@ -96,6 +96,7 @@ export default function MkdSDK() {
 				if (!payload.limit) {
 					payload.limit = 10;
 				}
+
 				const paginateResult = await fetch(
 					this._baseurl + `/v1/api/rest/${this._table}/${method}`,
 					{
