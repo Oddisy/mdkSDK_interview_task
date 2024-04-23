@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 import MkdSDK from "../utils/MkdSDK";
 import toy from "../assets/images/sdkImage.png";
 import {FaArrowUpLong} from "react-icons/fa6";
-
+import {MdKeyboardArrowDown} from "react-icons/md";
 const AdminDashboardPage = () => {
 	const [movieResponse, setMovieResponse] = useState([]);
 	const [movieTotalPage, setMovieTotalPage] = useState(null);
@@ -49,7 +49,7 @@ const AdminDashboardPage = () => {
 
 	return (
 		<div className="w-full flex justify-center items-center text-7xl text-gray-700  ">
-			<div className=" w-full lg:w-[50%]  bg-[#111111] px-[16px] lg:px-[112px] pt-4 pb-32">
+			<div className=" w-full lg:w-[60%]  bg-[#111111] px-[16px] lg:px-[112px] pt-4 pb-32">
 				<div className="flex flex-col gap-32">
 					<div className="flex justify-between">
 						<p className="text-[#FFFFFF] text-[48px] font-[900]">App</p>
@@ -83,21 +83,39 @@ const AdminDashboardPage = () => {
 						</div>
 					</div>
 				</div>
+				<div className="flex justify-between items-center mt-8  w-full px-4 py-4 rounded-[1rem]  text-[16px]  ">
+					<p className="px-4">#</p>
+					<div className="w-[70%] lg:w-[55%]  flex  items-center gap-4">
+						<p className="text-[16px] text-gray-300 opacity-40 pr-4 font-100">
+							Title
+						</p>
+					</div>
+
+					<div className="w-[15%] lg:w-[5%]  flex gap-2 items-center ">
+						<div className="text-gray-300 opacity-40 ">Author</div>
+					</div>
+					<div className="w-[15%] lg:w-[40%] flex justify-end items-center ">
+						<div className="flex gap-2 ">
+							<p className="text-gray-300 opacity-40">Most liked</p>
+							<MdKeyboardArrowDown className="text-[#ffff] opacity-40 font-100" />
+						</div>
+					</div>
+				</div>
 				{movieResponse.map((data) => {
 					return (
 						<div
 							key={data.id}
-							className="flex justify-between items-center mt-8  w-full px-4 py-2  rounded-[1rem]  border border-gray-500 border-opacity-50  text-[16px]  "
+							className="flex justify-between items-center mb-8  w-full px-4 py-2  rounded-[1rem]  border border-gray-500 border-opacity-50  text-[16px]  "
 						>
 							<p className="p-4">{data?.like}</p>
-							<div className="w-[70%] lg:w-[55%]  flex  items-center gap-4">
+							<div className="w-[70%] lg:w-[45%]  flex  items-center gap-4">
 								<img className="w-32 h-12 object-contain" src={toy} alt="" />
 								<p className="text-[16px] text-gray-300 opacity-40 pr-4 font-100">
 									{data?.title}
 								</p>
 							</div>
 
-							<div className="w-[15%] lg:w-[5%]  flex gap-2 items-center ">
+							<div className="w-[15%]   flex gap-2  justify-center items-center ">
 								<img className="rounded-full h-8 w-8" src={toy} alt="" />
 								<div className="text-[#9BFF00] opacity-40 ">
 									{data?.username}
