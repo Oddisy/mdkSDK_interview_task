@@ -92,7 +92,7 @@ const AdminDashboardPage = () => {
 	return (
 		<div className="w-full flex justify-center items-center text-7xl text-gray-700   ">
 			{showSnackbar ? <SnackBar /> : null}
-			<div className=" w-full bg-[#111111] px-[16px] lg:px-[112px] pt-4 pb-32">
+			<div className=" w-full bg-[#111111] h-full  px-[16px] lg:px-[112px] pt-4 pb-32">
 				<div className="flex flex-col gap-32">
 					<div className="flex justify-between">
 						<p className="text-[#FFFFFF] text-[48px] font-[900]">App</p>
@@ -107,7 +107,7 @@ const AdminDashboardPage = () => {
 						</div>
 					</div>
 					<div className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center">
-						<p className="text-[#FFFFFF] text-[40px] font-[100] font-[inter]">
+						<p className="leader_board_text text-[#FFFFFF] leader_board_text font-[100] font-[inter]">
 							Today’s leaderboard
 						</p>
 						<div className="text-[16px] flex items-center gap-4  px-4 py-2 rounded-xl  bg-[#1D1D1D]">
@@ -116,9 +116,11 @@ const AdminDashboardPage = () => {
 								<span>may</span>
 								<span>2022</span>
 							</p>
+							<p className="h-[0.3rem] w-[0.3rem] bg-white rounded-full opacity-40"></p>
 							<button className="px-2 py-2 bg-[#9BFF00] text-[14px] rounded-[0.5rem] ">
 								SUBMISSION OPENS
 							</button>
+							<p className="h-[0.3rem] w-[0.3rem] bg-white rounded-full opacity-40"></p>
 							<p className="flex justify-between">
 								<span>11</span>
 								<span>:</span>
@@ -136,10 +138,10 @@ const AdminDashboardPage = () => {
 					</div>
 
 					<div className="w-[15%] lg:w-[5%]  flex gap-2 items-center ">
-						<div className="text-gray-300 opacity-40 ">Author</div>
+						<div className="text-gray-300 opacity-40 mr-1 ">Author</div>
 					</div>
 					<div className="w-[15%] lg:w-[40%] flex justify-end items-center ">
-						<div className="flex gap-2 ">
+						<div className="flex md:gap-2 ">
 							<p className="text-gray-300 opacity-40">Most liked</p>
 							<MdKeyboardArrowDown className="text-[#ffff] opacity-40 font-100" />
 						</div>
@@ -167,7 +169,7 @@ const AdminDashboardPage = () => {
 						})}
 					</SortableContext>
 				</DndContext>
-				<div className="flex items-center justify-center text-[14px] pt-8 w-[20%] lg:w-full">
+				<div className="flex items-center justify-between text-[14px] pt-8 w-full ">
 					<button
 						className={`${
 							page === 1
@@ -185,9 +187,9 @@ const AdminDashboardPage = () => {
 							onClick={() => setPage(i + 1)}
 							className={`${
 								page === i + 1
-									? "bg-[#88c52c] opacity-700 hover:bg-[#6c9c25] text-white"
+									? "bg-[#88c52c] opacity-700 hover:bg-[#6c9c25] text-white hidden md:block"
 									: "text-white hover:text-black hover:bg-gray-200"
-							} font-bold py-2 px-4 rounded-full shadow-md mr-2 transition duration-300 ease-in-out`}
+							} font-bold py-2 px-4 rounded-full shadow-md mr-2 transition duration-300 ease-in-out hidden md:block`}
 						>
 							{i + 1}
 						</button>
