@@ -22,14 +22,22 @@ export const MovieCard = ({id, like, title, username}) => {
 		>
 			<p className="px-1 md:p-4">{like}</p>
 			<div className="w-[60%] lg:w-[50%]  flex  items-center gap-4">
-				<img className="w-16 md:w-32 h-12 object-contain" src={toy} alt="" />
+				<img
+					className="w-16 md:w-32 h-12 object-contain"
+					src={toy}
+					alt="author image"
+				/>
 				<p className="title_responsive text-gray-300 opacity-40 pr-2 md:pr-4 font-100">
 					{title}
 				</p>
 			</div>
 
 			<div className="w-[20%] lg:w-[10%]   flex gap-2  justify-center items-center ">
-				<img className="rounded-full h-8 w-8" src={toy} alt="" />
+				<img
+					className="rounded-full h-8 w-8"
+					src={toy}
+					alt="user display picture"
+				/>
 				<div className="text-[#9BFF00] opacity-40 ">{username}</div>
 			</div>
 			<div className="w-[15%] lg:w-[40%] flex justify-end items-center ">
